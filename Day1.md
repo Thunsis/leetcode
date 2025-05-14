@@ -226,71 +226,307 @@ Java中不同数据结构的长度获取方式不同：
 
 ## 27. 移除元素
 
-### 待补充
+### 适用条件
 
-// 27 - 性能很差的解法
-    public int removeElement(int[] nums, int val) {
-        int k = nums.length;
-        int i = 0;
-        while (i < nums.length) {
-            if (nums[i] == val) {
-                k--;
-                for (int j = i; j < nums.length - 1; j++) {
-                    nums[j] = nums[j+1];
-                }
-            } else {
-                i++;
-            }
-        }
-        return k;
-    }
+移除元素算法的适用条件：
 
-    // 27 - 单次遍历
-    public int removeElement(int[] nums, int val) {
-        int index = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != val) {
-                nums[index] = nums[i];
-                index++;
-            }
-        }
-        return index;
-    }
+1. **原地操作**：需要在不使用额外数组的情况下修改原数组
+2. **空间限制**：只允许使用O(1)的额外空间
+3. **元素识别**：需要从集合中识别并移除特定元素
+4. **长度追踪**：需要返回处理后的有效长度
 
-    // 27 - 双指针
-    
-    public int removeElement(int[] nums, int val) {
-        int left = 0;
-        int right = nums.length - 1;
-        while (left <= right) { // 这里等号要处理nums只有一个元素的情况
-            if (nums[left] == val) {
-                nums[left] = nums[right];
-                right --;
-            } else {
-                left ++;
-            }
-        }
-        return right + 1; //尤其注意
-    }
-    
-## 977.有序数组的平方 
+不适用情况：
+- 需要保留原始数组不变的场景
+- 有足够额外空间且性能要求不高的情况下，创建新数组可能更简单
+- 数据结构不支持随机访问的情况（如链表，有更高效的方法）
+
+### 解题思路
+
+移除元素问题有多种解决方案，每种方案都有不同的时间复杂度和情景适用性。
+
+#### 方法一：暴力解法（嵌套循环）
+
+最直观的方法是使用嵌套循环：当找到一个等于目标值的元素时，将其后面所有元素往前移动一位。
 
 ```java
-    public int[] sortedSquares(int[] nums) {
-        int left = 0;
-        int right = nums.length - 1;
-        int[] newNums = new int[nums.length];
-        int current = nums.length - 1;
-        while (left <= right) {
-            if (Math.pow(nums[left],2) <= Math.pow(nums[right],2)) {
-                newNums[current] = (int) Math.pow(nums[right],2);
-                right--;
-            } else {
-                newNums[current] = (int) Math.pow(nums[left],2);
-                left++;
+// 性能较差的解法 - 时间复杂度O(n²)
+public int removeElement(int[] nums, int val) {
+    int k = nums.length;
+    int i = 0;
+    while (i < nums.length) {
+        if (nums[i] == val) {
+            k--;
+            // 将后面的所有元素向前移一位
+            for (int j = i; j < nums.length - 1; j++) {
+                nums[j] = nums[j+1];
             }
-            current--;
+        } else {
+            i++;
         }
-        return newNums;
     }
+    return k;
+}
 ```
+
+**实现分析**：
+- 外循环遍历数组中的每个元素
+- 当遇到目标值时：
+  1. 长度计数器`k`减1
+  2. 内循环将该位置之后的所有元素前移一位
+  3. **关键错误点**: 外循环索引`i`不递增，因为当前位置已被新元素替换
+- 当前元素不是目标值时，外循环索引`i`递增
+
+**问题与缺陷**：
+- 时间复杂度为O(n²)，效率低下
+- 每找到一个目标元素就要移动大量元素
+- 数组越大或目标值出现越频繁，性能越差
+
+#### 方法二：快慢指针法（单次遍历）
+
+一种更高效的方法是使用"快慢指针"：
+- "慢指针"(`index`)指向当前可以放置非目标值的位置
+- "快指针"(`i`)用于遍历数组
+
+```java
+// 单次遍历 - 时间复杂度O(n)
+public int removeElement(int[] nums, int val) {
+    int index = 0;
+    for (int i = 0; i < nums.length; i++) {
+        if (nums[i] != val) {
+            nums[index] = nums[i];
+            index++;
+        }
+    }
+    return index;
+}
+```
+
+**实现分析**：
+- `index`追踪不等于目标值的元素应该放置的位置
+- 遍历数组，只有当元素不等于目标值时才操作：
+  1. 将该元素复制到`index`指定的位置
+  2. `index`向前移动一位
+- 遍历结束后，`index`即为新数组的长度
+
+**优势**：
+- 时间复杂度为O(n)，只需一次遍历
+- 元素移动次数最少（每个保留的元素最多移动一次）
+- 简单直观，易于理解
+
+#### 方法三：首尾双指针法
+
+当我们不关心元素的相对顺序时，可以使用更高效的首尾双指针方法：
+
+```java
+// 首尾双指针 - 时间复杂度O(n)，但移动次数可能更少
+public int removeElement(int[] nums, int val) {
+    int left = 0;
+    int right = nums.length - 1;
+    
+    while (left <= right) { // 等号处理边界情况
+        if (nums[left] == val) {
+            // 用最后一个元素替换当前元素
+            nums[left] = nums[right];
+            right--;
+        } else {
+            left++;
+        }
+    }
+    
+    return right + 1;
+}
+```
+
+**实现分析**：
+- `left`从左向右遍历，`right`指向数组末尾有效元素
+- 当`left`指向目标值时：
+  1. 用`right`位置的元素覆盖它
+  2. `right`左移一位（缩小有效区间）
+  3. `left`不移动，因为需要检查新复制过来的元素
+- 当`left`指向非目标值时，`left`右移一位
+- 循环结束条件为`left <= right`（处理数组只有一个元素的情况）
+
+**返回值说明**：
+为什么返回`right + 1`而不是`left + 1`？
+- 当循环结束时，`right`指向最后一个有效元素的位置
+- 由于数组索引从0开始，长度 = 最大索引 + 1
+- 例如：数组[1,2,3]的最大索引是2，长度是3 = 2 + 1
+- 而`left`此时指向的是第一个"超出有效范围"的位置，不适合用于计算长度
+
+**优势**：
+- 时间复杂度为O(n)
+- 当目标元素较少时，操作次数比方法二还少
+- 特别适合不需要保持元素顺序的场景
+
+### 算法复杂度比较
+
+| 方法 | 时间复杂度 | 空间复杂度 | 是否保持元素相对顺序 |
+|------|------------|------------|----------------------|
+| 暴力解法 | O(n²) | O(1) | 是 |
+| 快慢指针 | O(n) | O(1) | 是 |
+| 首尾双指针 | O(n) | O(1) | 否 |
+
+### 易错点与注意事项
+
+1. **循环条件**：首尾双指针方法中，使用`left <= right`而非`left < right`，这确保了对单元素数组的正确处理。
+
+2. **元素重复检查**：在首尾双指针方法中，替换元素后不要忘记检查新元素是否为目标值。
+
+3. **返回值计算**：首尾双指针方法返回`right + 1`，因为`right`指向最后一个有效元素的索引。
+
+4. **边界情况**：
+   - 空数组：返回0
+   - 所有元素都是目标值：返回0
+   - 没有目标值：返回原数组长度
+   - 单元素数组：上述方法都能正确处理
+    
+## 977. 有序数组的平方
+
+### 适用条件
+
+有序数组平方算法的适用条件：
+
+1. **已排序数据**：输入数组已按升序（非递减）排序
+2. **包含负数**：数组可能包含负数，平方后会改变其相对大小
+3. **结果有序性**：需要结果数组保持有序
+4. **效率要求**：需要优于简单的"平方后排序"解法的O(nlogn)复杂度
+
+不适用情况：
+- 数组本身无序
+- 只包含非负数的有序数组（此时直接平方即可保持有序性）
+- 不要求结果有序时
+
+### 解题思路
+
+这个问题的挑战在于：数组已排序，但可能包含负数，而负数平方后会变大，打破原有的排序。
+
+#### 方法一：平方后排序
+
+最直观的方法是将每个元素平方，然后对结果数组排序。
+
+```java
+// 暴力解法 - 时间复杂度O(nlogn)
+public int[] sortedSquares(int[] nums) {
+    int[] result = new int[nums.length];
+    
+    // 计算每个元素的平方
+    for (int i = 0; i < nums.length; i++) {
+        result[i] = nums[i] * nums[i];
+    }
+    
+    // 对结果排序
+    Arrays.sort(result);
+    
+    return result;
+}
+```
+
+**实现分析**：
+- 直接遍历数组，计算每个元素的平方
+- 使用内置排序函数对结果排序
+- 简单直观，但没有利用输入数组已排序的特性
+
+#### 方法二：双指针法
+
+更优的方法是利用输入数组已排序的特性和平方的性质：两端的元素平方后可能最大。
+
+```java
+// 双指针法 - 时间复杂度O(n)
+public int[] sortedSquares(int[] nums) {
+    int left = 0;
+    int right = nums.length - 1;
+    int[] result = new int[nums.length];
+    int position = nums.length - 1;  // 从结果数组的末尾开始填充
+    
+    while (left <= right) {
+        int leftSquare = nums[left] * nums[left];
+        int rightSquare = nums[right] * nums[right];
+        
+        if (leftSquare > rightSquare) {
+            result[position] = leftSquare;
+            left++;
+        } else {
+            result[position] = rightSquare;
+            right--;
+        }
+        position--;
+    }
+    
+    return result;
+}
+```
+
+**优化实现**：避免重复计算平方
+
+```java
+public int[] sortedSquares(int[] nums) {
+    int left = 0;
+    int right = nums.length - 1;
+    int[] result = new int[nums.length];
+    int current = nums.length - 1;  // 从结果数组的末尾开始填充
+    
+    while (left <= right) {
+        // 计算两端元素的平方
+        int leftSquare = nums[left] * nums[left];
+        int rightSquare = nums[right] * nums[right];
+        
+        if (leftSquare <= rightSquare) {
+            result[current] = rightSquare;
+            right--;
+        } else {
+            result[current] = leftSquare;
+            left++;
+        }
+        current--;
+    }
+    
+    return result;
+}
+```
+
+**实现分析**：
+- 使用两个指针分别指向原数组的两端
+- 比较两端元素平方的大小，将较大者放入结果数组的末尾
+- 移动相应的指针，并将结果数组的填充位置向前移动
+- 重复直到两个指针相遇
+
+**优势**：
+- 时间复杂度为O(n)，只需一次遍历
+- 充分利用了输入数组已排序的特性
+- 不需要额外的排序操作
+
+### 算法复杂度
+
+| 方法 | 时间复杂度 | 空间复杂度 |
+|------|------------|------------|
+| 平方后排序 | O(nlogn) | O(n) |
+| 双指针法 | O(n) | O(n) |
+
+空间复杂度O(n)来自于需要创建一个新的结果数组。
+
+### 性能优化技巧
+
+1. **避免重复计算**：如果需要多次使用平方值，先计算一次再使用，而不是重复调用`Math.pow()`函数。
+
+2. **直接使用乘法**：对于平方运算，使用`nums[i] * nums[i]`比调用`Math.pow(nums[i], 2)`更高效，因为避免了函数调用开销。
+
+3. **正确的初始化**：一开始就创建正确大小的结果数组，避免动态扩容。
+
+### 易错点与注意事项
+
+1. **边界条件处理**：
+   - 空数组：返回空数组
+   - 单元素数组：直接返回该元素的平方
+   
+2. **循环条件**：使用`left <= right`确保处理所有元素。
+
+3. **从后向前填充**：双指针法中从结果数组末尾开始填充是关键，这样能确保按照非递减顺序排列。
+
+4. **符号注意**：原数组可能包含正数、负数和零，但平方后全为非负数。平方运算会使负数的绝对值更重要。
+
+### 实际应用
+
+这种双指针技巧适用于许多需要合并或比较两个有序集合的场景，例如：
+- 合并两个有序数组
+- 查找两个有序数组的交集
+- 判断一个数组是否包含另一个数组的所有元素
