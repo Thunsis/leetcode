@@ -128,6 +128,41 @@ public class ArraySolution {
         }
     }
 
+    // 59
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        int startx = 0;
+        int starty = 0;
+        int offset = 1;
+        int count = 1;
+        int i;
+        int j;
+        for (int k = 0; k < n/2; k++) {
+            for (j = startx; j < n - offset; j++) {
+                result[startx][j] = count;
+                count++;
+            }
+            for (i = starty; i < n - offset; i++) {
+                result[i][j] = count;
+                count++;
+            }
+            for (; j > offset - 1; j--) {
+                result[i][j] = count;
+                count++;
+            }
+            for (; i > offset - 1; i--) {
+                result[i][j] = count;
+                count++;
+            }
+            startx++;
+            starty++;
+            offset++;
+        }
+        if (n%2 == 1) {
+            result[n/2][n/2] = count;
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         int[] myArray = {2,3,1,2,4,3};
@@ -138,11 +173,17 @@ public class ArraySolution {
 //        System.out.println(mySolution.search(myArray, target));
 //        System.out.println(mySolution.removeElement(myArray, val));
 //        int[] newNums = mySolution.sortedSquares(myArray);
-//        for(int i = 1; i < newNums.length; i++) {
+//        for (int i = 1; i < newNums.length; i++) {
 //            System.out.print(newNums[i] + "\t");
 //        }
-        System.out.println(mySolution.minSubArrayLen(target, myArray));
-
+//        System.out.println(mySolution.minSubArrayLen(target, myArray));
+        int n = 4;
+        int[][] result = mySolution.generateMatrix(n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(result[i][j] + "\t");
+            }
+        }
 
 
     }

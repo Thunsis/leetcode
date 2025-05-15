@@ -209,6 +209,43 @@ Java中提供了一系列表示数值类型极限值的常量，这些常量在�
 - 不需要按特定顺序处理矩阵元素的场景
 - 矩阵处理可以通过数学公式直接计算的情况
 
+### 代码实现
+```java
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        int startx = 0;
+        int starty = 0;
+        int offset = 1;
+        int count = 1;
+        int i;
+        int j;
+        for (int k = 0; k < n/2; k++) {
+            for (j = startx; j < n - offset; j++) {
+                result[startx][j] = count;
+                count++;
+            }
+            for (i = starty; i < n - offset; i++) {
+                result[i][j] = count;
+                count++;
+            }
+            for (; j > offset - 1; j--) {
+                result[i][j] = count;
+                count++;
+            }
+            for (; i > offset - 1; i--) {
+                result[i][j] = count;
+                count++;
+            }
+            startx++;
+            starty++;
+            offset++;
+        }
+        if (n%2 == 1) {
+            result[n/2][n/2] = count;
+        }
+        return result;
+    }
+```
 ### 解题思路
 
 螺旋矩阵问题要求我们按照螺旋顺序（通常是顺时针）填充一个n×n的矩阵，从1开始递增填充直到n²。
