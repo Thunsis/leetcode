@@ -37,6 +37,36 @@ public class ArraySolution {
 //        return -1;
 //    }
 
+    // 35 - 二分法
+    // 时间复杂度 O(log n)
+    // 空间复杂度 O(1)
+    public int searchInsert(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            // 每个地方都要注意让nums[mid]和target做比较，而不是用mid和target做比较
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // 经推算当target落在合理范围的right左边的时候需要特别让其在right的位置，而不是right+1
+//        if (right >= 0 && right <= nums.length - 1) {
+//            if (target < nums[right]) {
+//                return right;
+//            }
+//        }
+//
+//        return right + 1;
+        return left; // 为什么返回left是个值得思考的问题
+        // 换个角度想，这可能和计算mid时/2会自动向下取整有关
+    }
+
 
     // 27 - 性能很差的解法
     // 时间复杂度 O(n^2)
@@ -195,9 +225,9 @@ public class ArraySolution {
 
 
     public static void main(String[] args) {
-        int[] myArray = {2,3,1,2,4,3};
+        int[] myArray = {1,3,4,5,6};
 
-        int target = 7;
+//        int target = 7;
 //        int val = 2;
         ArraySolution mySolution = new ArraySolution();
 //        System.out.println(mySolution.search(myArray, target));
@@ -207,13 +237,18 @@ public class ArraySolution {
 //            System.out.print(newNums[i] + "\t");
 //        }
 //        System.out.println(mySolution.minSubArrayLen(target, myArray));
-        int n = 4;
-        int[][] result = mySolution.generateMatrix(n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(result[i][j] + "\t");
-            }
-        }
+//        int n = 4;
+//        int[][] result = mySolution.generateMatrix(n);
+//        for (int i = 0; i < n; i++) {
+//            for (int j = 0; j < n; j++) {
+//                System.out.print(result[i][j] + "\t");
+//            }
+//        }
+
+        int target = 3;
+
+        System.out.println(mySolution.searchInsert(myArray, target));
+
 
 
     }
