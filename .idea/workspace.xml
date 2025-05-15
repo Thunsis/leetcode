@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15d5bede-49f8-489b-ad1f-76176f64bb27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Kamacoder44.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Kamacoder54.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Day2.md" beforeDir="false" afterPath="$PROJECT_DIR$/Day2.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ArraySolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArraySolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kamacoder44.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kamacoder44.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kamacoder58.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kamacoder58.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +80,7 @@
       <workItem from="1747231091980" duration="4369000" />
       <workItem from="1747237117512" duration="2618000" />
       <workItem from="1747239753980" duration="18000" />
-      <workItem from="1747239782924" duration="17400000" />
+      <workItem from="1747239782924" duration="20645000" />
     </task>
     <servers />
   </component>
@@ -98,18 +96,13 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ArraySolution.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Kamacoder44.java</url>
           <line>7</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/ArraySolution.java</url>
-          <line>39</line>
+          <line>43</line>
           <properties class="ArraySolution">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

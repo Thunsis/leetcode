@@ -38,22 +38,20 @@
 ### 代码实现
 
 ```java
-public class Solution {
-    public int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (target == nums[mid]) {
-                return mid;
-            } else if (target > nums[mid]) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
+public int search(int[] nums, int target) {
+    int left = 0;
+    int right = nums.length - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // 避免大整数溢出
+        if (target == nums[mid]) {
+            return mid;
+        } else if (target > nums[mid]) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
         }
-        return -1;
     }
+    return -1;
 }
 ```
 
@@ -242,19 +240,19 @@ Java中不同数据结构的长度获取方式不同：
 
 ### 代码实现
 ```java
-    public int removeElement(int[] nums, int val) {
-        int left = 0;
-        int right = nums.length - 1;
-        while (left <= right) { // 这里等号要处理nums只有一个元素的情况
-            if (nums[left] == val) {
-                nums[left] = nums[right];
-                right --;
-            } else {
-                left ++;
-            }
+public int removeElement(int[] nums, int val) {
+    int left = 0;
+    int right = nums.length - 1;
+    while (left <= right) { // 这里等号要处理nums只有一个元素的情况
+        if (nums[left] == val) {
+            nums[left] = nums[right];
+            right --;
+        } else {
+            left ++;
         }
-        return right + 1; //尤其注意
     }
+    return right + 1; //尤其注意
+}
 ```
 
 ### 解题思路
@@ -415,23 +413,24 @@ public int removeElement(int[] nums, int val) {
 
 ### 代码实现
 ```java
-    public int[] sortedSquares(int[] nums) {
-        int left = 0;
-        int right = nums.length - 1;
-        int[] newNums = new int[nums.length];
-        int current = nums.length - 1;
-        while (left <= right) {
-            if (Math.pow(nums[left],2) <= Math.pow(nums[right],2)) {
-                newNums[current] = (int) Math.pow(nums[right],2);
-                right--;
-            } else {
-                newNums[current] = (int) Math.pow(nums[left],2);
-                left++;
-            }
-            current--;
+public int[] sortedSquares(int[] nums) {
+    int left = 0;
+    int right = nums.length - 1;
+    int[] newNums = new int[nums.length];
+    int current = nums.length - 1;
+    // 从两边往中间遍历，初始最大值一定在最两端
+    while (left <= right) {
+        if (Math.pow(nums[left],2) <= Math.pow(nums[right],2)) {
+            newNums[current] = (int) Math.pow(nums[right],2);
+            right--;
+        } else {
+            newNums[current] = (int) Math.pow(nums[left],2);
+            left++;
         }
-        return newNums;
+        current--;
     }
+    return newNums;
+}
 ```
 
 ### 解题思路

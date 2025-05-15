@@ -18,33 +18,28 @@
 
 ### 代码实现
 ```java
-    public int minSubArrayLen(int target, int[] nums) {
-        int left = 0;
-        int right = 0;
-        int length = 0;
-        int minLength = Integer.MAX_VALUE;
-        int sum = 0;
-        while (right <= nums.length) {
-            if (sum < target) {
-                if (right <= nums.length - 1) {
-                    sum += nums[right];
-                }
-                right++;
-            } else {
-                length = right - left;
-                if (minLength > length) {
-                    minLength = length;
-                }
-                sum -= nums[left];
-                left++;
+public int minSubArrayLen(int target, int[] nums) {
+    int left = 0;
+    int right = 0;
+    int length = 0;
+    int minLength = Integer.MAX_VALUE;
+    int sum = 0;
+    while (right <= nums.length) {
+        if (sum < target) {
+            if (right <= nums.length - 1) { // right遍历到最后，right = nums.length，nums[right]越界
+                sum += nums[right];
             }
-        }
-        if (minLength == Integer.MAX_VALUE) {
-            return 0;
+            right++;
         } else {
-            return minLength;
+            length = right - left;
+            minLength = minLength > length ? length : minLength;
+            sum -= nums[left];
+            left++;
         }
     }
+
+    return minLength == Integer.MAX_VALUE ? 0 : minLength;
+}
 ```
 ### 解题思路
 
@@ -211,40 +206,58 @@ Java中提供了一系列表示数值类型极限值的常量，这些常量在�
 
 ### 代码实现
 ```java
-    public int[][] generateMatrix(int n) {
-        int[][] result = new int[n][n];
-        int startx = 0;
-        int starty = 0;
-        int offset = 1;
-        int count = 1;
-        int i;
-        int j;
-        for (int k = 0; k < n/2; k++) {
-            for (j = startx; j < n - offset; j++) {
-                result[startx][j] = count;
-                count++;
-            }
-            for (i = starty; i < n - offset; i++) {
-                result[i][j] = count;
-                count++;
-            }
-            for (; j > offset - 1; j--) {
-                result[i][j] = count;
-                count++;
-            }
-            for (; i > offset - 1; i--) {
-                result[i][j] = count;
-                count++;
-            }
-            startx++;
-            starty++;
-            offset++;
+public int[][] generateMatrix(int n) {
+    int[][] result = new int[n][n];
+    int startx = 0;
+    int starty = 0;
+    int offset = 1;
+    int count = 1;
+    int i;
+    int j;
+
+    // startx = starty = offset-1
+    for (int k = 0; k < n/2; k++) {
+
+        // 把握好每个循环的起点和终点，确保没有overlap
+        // 起点 [startx][starty]，每往里一层-1
+
+        // 起点 [startx][starty]
+        // 终点 [startx][n-offset-1]
+        for (j = startx; j < n - offset; j++) {
+            result[startx][j] = count;
+            count++;
         }
-        if (n%2 == 1) {
-            result[n/2][n/2] = count;
+
+        // 起点 [startx][n-offset]
+        // 终点 [n-offset-1][n-offset]
+        for (i = starty; i < n - offset; i++) {
+            result[i][j] = count;
+            count++;
         }
-        return result;
+
+        // 起点 [n-offset][n-offset]
+        // 终点 [n-offset][offset]
+        for (; j > offset - 1; j--) {
+            result[i][j] = count;
+            count++;
+        }
+
+        // 起点 [n-offset][offset-1]
+        // 终点 [offset][offset-1]
+        for (; i > offset - 1; i--) {
+            result[i][j] = count;
+            count++;
+        }
+        startx++;
+        starty++;
+        offset++;
     }
+    // 对奇数最中间的最大数单独赋值
+    if (n%2 == 1) {
+        result[n/2][n/2] = count;
+    }
+    return result;
+}
 ```
 ### 解题思路
 
@@ -384,17 +397,17 @@ public int[][] generateMatrix(int n) {
 
 ```java
 // kamacoder 58
-// https://www.programmercarl.com/kamacoder/0058.%E5%8C%BA%E9%97%B4%E5%92%8C.html
 
 import java.util.Scanner;
 
-public class Main {
+public class Kamacoder58 {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int[] nums = new int[n];
 
+        // 把每个位置所对应的它之前所有数加总的值存到数组里
         for (int i = 0; i < n; i++) {
             if (i == 0) {
                 nums[i] = scanner.nextInt();
@@ -403,6 +416,7 @@ public class Main {
             }
         }
 
+        // 前缀和思想，0~b - 0~a = a~b
         while (scanner.hasNext()) {
             int a = scanner.nextInt();
             int b = scanner.nextInt();
@@ -435,6 +449,8 @@ public class Kamacoder44 {
         int nPriceLower = 0;
         int mPriceUpper = 0;
         int mPriceLower = 0;
+
+        // 初始化数组的同时把totalPrice计算出来
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 nums[i][j] = scanner.nextInt();
@@ -442,6 +458,13 @@ public class Kamacoder44 {
             }
         }
 
+        /*
+            把横向最接近totalPrice/2的以下及以上两种price算出来
+            a b c
+            - - -
+            d e f
+            g h i
+         */
         for (int i = 0; i < n && nPriceUpper <= totalPrice/2; i++) {
             for (int j = 0; j < m; j++) {
                 nPriceUpper += nums[i][j];
@@ -451,6 +474,12 @@ public class Kamacoder44 {
             }
         }
 
+        /*
+            把纵向最接近totalPrice/2的以下及以上两种price算出来
+            a | b c
+            d | e f
+            g | h i
+         */
         for (int j = 0; j < m && mPriceUpper <= totalPrice/2; j++) {
             for (int i = 0; i < n; i++) {
                 mPriceUpper += nums[i][j];
@@ -460,11 +489,13 @@ public class Kamacoder44 {
             }
         }
 
+        // 无非这四种情况之一为差值最小
         System.out.println(Math.min(
                 Math.min(Math.abs(totalPrice - 2 * nPriceUpper), Math.abs(totalPrice - 2 * nPriceLower)),
                 Math.min(Math.abs(totalPrice - 2 * mPriceUpper), Math.abs(totalPrice - 2 * mPriceLower))
         ));
 
+        scanner.close();
     }
 
 }
