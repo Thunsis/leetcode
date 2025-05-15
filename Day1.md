@@ -240,6 +240,23 @@ Java中不同数据结构的长度获取方式不同：
 - 有足够额外空间且性能要求不高的情况下，创建新数组可能更简单
 - 数据结构不支持随机访问的情况（如链表，有更高效的方法）
 
+### 代码实现
+```java
+    public int removeElement(int[] nums, int val) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) { // 这里等号要处理nums只有一个元素的情况
+            if (nums[left] == val) {
+                nums[left] = nums[right];
+                right --;
+            } else {
+                left ++;
+            }
+        }
+        return right + 1; //尤其注意
+    }
+```
+
 ### 解题思路
 
 移除元素问题有多种解决方案，每种方案都有不同的时间复杂度和情景适用性。
@@ -395,6 +412,27 @@ public int removeElement(int[] nums, int val) {
 - 数组本身无序
 - 只包含非负数的有序数组（此时直接平方即可保持有序性）
 - 不要求结果有序时
+
+### 代码实现
+```java
+    public int[] sortedSquares(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int[] newNums = new int[nums.length];
+        int current = nums.length - 1;
+        while (left <= right) {
+            if (Math.pow(nums[left],2) <= Math.pow(nums[right],2)) {
+                newNums[current] = (int) Math.pow(nums[right],2);
+                right--;
+            } else {
+                newNums[current] = (int) Math.pow(nums[left],2);
+                left++;
+            }
+            current--;
+        }
+        return newNums;
+    }
+```
 
 ### 解题思路
 

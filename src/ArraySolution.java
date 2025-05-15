@@ -99,19 +99,50 @@ public class ArraySolution {
         return newNums;
     }
 
+    // 209
+    public int minSubArrayLen(int target, int[] nums) {
+        int left = 0;
+        int right = 0;
+        int length = 0;
+        int minLength = Integer.MAX_VALUE;
+        int sum = 0;
+        while (right <= nums.length) {
+            if (sum < target) {
+                if (right <= nums.length - 1) {
+                    sum += nums[right];
+                }
+                right++;
+            } else {
+                length = right - left;
+                if (minLength > length) {
+                    minLength = length;
+                }
+                sum -= nums[left];
+                left ++;
+            }
+        }
+        if (minLength == Integer.MAX_VALUE) {
+            return 0;
+        } else {
+            return minLength;
+        }
+    }
+
 
     public static void main(String[] args) {
-        int[] myArray = {-4,-1,0,3,10};
+        int[] myArray = {2,3,1,2,4,3};
 
-//        int target = 100;
-        int val = 2;
+        int target = 7;
+//        int val = 2;
         ArraySolution mySolution = new ArraySolution();
 //        System.out.println(mySolution.search(myArray, target));
 //        System.out.println(mySolution.removeElement(myArray, val));
-        int[] newNums = mySolution.sortedSquares(myArray);
-        for(int i = 1; i < newNums.length; i++) {
-            System.out.print(newNums[i] + "\t");
-        }
+//        int[] newNums = mySolution.sortedSquares(myArray);
+//        for(int i = 1; i < newNums.length; i++) {
+//            System.out.print(newNums[i] + "\t");
+//        }
+        System.out.println(mySolution.minSubArrayLen(target, myArray));
+
 
 
     }
