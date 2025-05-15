@@ -1,4 +1,4 @@
-# 代码随想录算法训练营第二天：209. 长度最小的子数组，59. 螺旋矩阵II
+# 代码随想录算法训练营第二天：209. 长度最小的子数组，59. 螺旋矩阵II，kamacoder 58.区间和，kamacoder 44. 开发商购买土地
 
 ## 209. 长度最小的子数组
 
@@ -36,7 +36,7 @@
                     minLength = length;
                 }
                 sum -= nums[left];
-                left ++;
+                left++;
             }
         }
         if (minLength == Integer.MAX_VALUE) {
@@ -380,3 +380,92 @@ public int[][] generateMatrix(int n) {
 - 数据可视化中的特定布局算法
 - 某些游戏中的地图生成或探索算法
 
+## kamacoder 58.区间和
+
+```java
+// kamacoder 58
+// https://www.programmercarl.com/kamacoder/0058.%E5%8C%BA%E9%97%B4%E5%92%8C.html
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                nums[i] = scanner.nextInt();
+            } else {
+                nums[i] = nums[i-1] + scanner.nextInt();
+            }
+        }
+
+        while (scanner.hasNext()) {
+            int a = scanner.nextInt();
+            int b = scanner.nextInt();
+            if (a == 0) {
+                System.out.println(nums[b]);
+            } else {
+                System.out.println(nums[b] - nums[a-1]);
+            }
+        }
+        scanner.close();
+
+    }
+}
+```
+
+## kamacoder 44. 开发商购买土地
+```java
+import java.util.Scanner;
+
+// kamacoder 44
+public class Kamacoder44 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] nums = new int[n][m];
+        int totalPrice = 0;
+        int nPriceUpper = 0;
+        int nPriceLower = 0;
+        int mPriceUpper = 0;
+        int mPriceLower = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                nums[i][j] = scanner.nextInt();
+                totalPrice += nums[i][j];
+            }
+        }
+
+        for (int i = 0; i < n && nPriceUpper <= totalPrice/2; i++) {
+            for (int j = 0; j < m; j++) {
+                nPriceUpper += nums[i][j];
+                if (nPriceUpper <= totalPrice/2) {
+                    nPriceLower = nPriceUpper;
+                }
+            }
+        }
+
+        for (int j = 0; j < m && mPriceUpper <= totalPrice/2; j++) {
+            for (int i = 0; i < n; i++) {
+                mPriceUpper += nums[i][j];
+                if (mPriceUpper <= totalPrice/2) {
+                    mPriceLower = mPriceUpper;
+                }
+            }
+        }
+
+        System.out.println(Math.min(
+                Math.min(Math.abs(totalPrice - 2 * nPriceUpper), Math.abs(totalPrice - 2 * nPriceLower)),
+                Math.min(Math.abs(totalPrice - 2 * mPriceUpper), Math.abs(totalPrice - 2 * mPriceLower))
+        ));
+
+    }
+
+}
+```

@@ -118,7 +118,7 @@ public class ArraySolution {
                     minLength = length;
                 }
                 sum -= nums[left];
-                left ++;
+                left++;
             }
         }
         if (minLength == Integer.MAX_VALUE) {
@@ -163,6 +163,8 @@ public class ArraySolution {
         }
         return result;
     }
+
+
 
     public static void main(String[] args) {
         int[] myArray = {2,3,1,2,4,3};
