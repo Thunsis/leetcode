@@ -21,21 +21,21 @@ public class ArraySolution {
     // 704 - 左开右闭
     // 时间复杂度 O(log n)
     // 空间复杂度 O(1)
-//    public int search(int[] nums, int target) {
-//        int left = 0;
-//        int right = nums.length;
-//        while (left < right) {
-//            int mid = left + (right - left) / 2;
-//            if (target == nums[mid]) {
-//                return mid;
-//            } else if (target > nums[mid]) {
-//                left = mid + 1;
-//            } else {
-//                right = mid;
-//            }
-//        }
-//        return -1;
-//    }
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (target == nums[mid]) {
+                return mid;
+            } else if (target > nums[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return -1;
+    }
 
     // 35 - 二分法
     // 时间复杂度 O(log n)
@@ -71,35 +71,35 @@ public class ArraySolution {
     // 27 - 性能很差的解法
     // 时间复杂度 O(n^2)
     // 空间复杂度 O(1)
-//    public int removeElement(int[] nums, int val) {
-//        int k = nums.length;
-//        int i = 0;
-//        while (i < nums.length) {
-//            if (nums[i] == val) {
-//                k--;
-//                for (int j = i; j < nums.length - 1; j++) {
-//                    nums[j] = nums[j+1];
-//                }
-//            } else {
-//                i++;
-//            }
-//        }
-//        return k;
-//    }
+    public int removeElement(int[] nums, int val) {
+        int k = nums.length;
+        int i = 0;
+        while (i < nums.length) {
+            if (nums[i] == val) {
+                k--;
+                for (int j = i; j < nums.length - 1; j++) {
+                    nums[j] = nums[j+1];
+                }
+            } else {
+                i++;
+            }
+        }
+        return k;
+    }
 
     // 27 - 单次遍历
     // 时间复杂度 O(n)
     // 空间复杂度 O(1)
-//    public int removeElement(int[] nums, int val) {
-//        int index = 0;
-//        for (int i = 0; i < nums.length; i++) {
-//            if (nums[i] != val) {
-//                nums[index] = nums[i]; // 不需要每次都将后面所有的都往前移
-//                index++;
-//            }
-//        }
-//        return index;
-//    }
+    public int removeElement(int[] nums, int val) {
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                nums[index] = nums[i]; // 不需要每次都将后面所有的都往前移
+                index++;
+            }
+        }
+        return index;
+    }
 
     // 27 - 双指针
     // 时间复杂度 O(n)

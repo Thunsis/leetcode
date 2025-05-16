@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15d5bede-49f8-489b-ad1f-76176f64bb27" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/LinkedListSolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Day1.md" beforeDir="false" afterPath="$PROJECT_DIR$/Day1.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ArraySolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArraySolution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +31,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2x5YqLsoPmkGdm9bd5UOnHo3QAc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,7 +42,9 @@
   "keyToString": {
     "Application.ArraySolution.executor": "Run",
     "Application.Kamacoder44.executor": "Run",
+    "Application.LinkedListSolution.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.MyLinkedList.executor": "Debug",
     "Application.Solution704.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -59,6 +64,28 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="main.java" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.MyLinkedList">
+    <configuration name="LinkedListSolution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LinkedListSolution" />
+      <module name="leetcode" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MyLinkedList" />
+      <module name="leetcode" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MyLinkedList" />
+        <item itemvalue="Application.LinkedListSolution" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -80,6 +107,8 @@
       <workItem from="1747237117512" duration="2618000" />
       <workItem from="1747239753980" duration="18000" />
       <workItem from="1747239782924" duration="24432000" />
+      <workItem from="1747364229785" duration="6179000" />
+      <workItem from="1747371071590" duration="8601000" />
     </task>
     <servers />
   </component>

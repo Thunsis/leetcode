@@ -38,6 +38,9 @@
 ### 代码实现
 
 ```java
+// 704 - 左闭右闭
+// 时间复杂度 O(log n)
+// 空间复杂度 O(1)
 public int search(int[] nums, int target) {
     int left = 0;
     int right = nums.length - 1;
@@ -92,28 +95,23 @@ public int binarySearch(int[] nums, int target) {
 这种实现中搜索区间包括左端点但不包括右端点。
 
 ```java
-public int binarySearch(int[] nums, int target) {
-    // 初始化区间[0, nums.length)，不包括右端点
+// 704 - 左闭右开
+// 时间复杂度 O(log n)
+// 空间复杂度 O(1)
+public int search(int[] nums, int target) {
     int left = 0;
     int right = nums.length;
-    
-    // 当left == right时区间为空，搜索结束
     while (left < right) {
-        // 计算中间位置（防溢出写法）
         int mid = left + (right - left) / 2;
-        
-        if (nums[mid] == target) {
-            return mid;  // 找到目标值
-        } else if (nums[mid] < target) {
-            // 目标在右半部分[mid+1, right)
+        if (target == nums[mid]) {
+            return mid;
+        } else if (target > nums[mid]) {
             left = mid + 1;
         } else {
-            // 目标在左半部分[left, mid)
             right = mid;
         }
     }
-    
-    return -1;  // 未找到
+    return -1;
 }
 ```
 
@@ -224,6 +222,9 @@ public int binarySearch(int[] nums, int target) {
 ### 代码实现
 
 ```java
+// 35 - 二分法
+// 时间复杂度 O(log n)
+// 空间复杂度 O(1)
 public int searchInsert(int[] nums, int target) {
     int left = 0;
     int right = nums.length - 1;
@@ -375,6 +376,9 @@ Java中不同数据结构的长度获取方式不同：
 
 ### 代码实现
 ```java
+// 27 - 双指针
+// 时间复杂度 O(n)
+// 空间复杂度 O(1)
 public int removeElement(int[] nums, int val) {
     int left = 0;
     int right = nums.length - 1;
@@ -399,14 +403,15 @@ public int removeElement(int[] nums, int val) {
 最直观的方法是使用嵌套循环：当找到一个等于目标值的元素时，将其后面所有元素往前移动一位。
 
 ```java
-// 性能较差的解法 - 时间复杂度O(n²)
+// 27 - 性能很差的解法
+// 时间复杂度 O(n^2)
+// 空间复杂度 O(1)
 public int removeElement(int[] nums, int val) {
     int k = nums.length;
     int i = 0;
     while (i < nums.length) {
         if (nums[i] == val) {
             k--;
-            // 将后面的所有元素向前移一位
             for (int j = i; j < nums.length - 1; j++) {
                 nums[j] = nums[j+1];
             }
@@ -438,12 +443,14 @@ public int removeElement(int[] nums, int val) {
 - "快指针"(`i`)用于遍历数组
 
 ```java
-// 单次遍历 - 时间复杂度O(n)
+// 27 - 单次遍历
+// 时间复杂度 O(n)
+// 空间复杂度 O(1)
 public int removeElement(int[] nums, int val) {
     int index = 0;
     for (int i = 0; i < nums.length; i++) {
         if (nums[i] != val) {
-            nums[index] = nums[i];
+            nums[index] = nums[i]; // 不需要每次都将后面所有的都往前移
             index++;
         }
     }
@@ -548,6 +555,9 @@ public int removeElement(int[] nums, int val) {
 
 ### 代码实现
 ```java
+// 977 - 双指针
+// 时间复杂度 O(n)
+// 空间复杂度 O(n)
 public int[] sortedSquares(int[] nums) {
     int left = 0;
     int right = nums.length - 1;
