@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15d5bede-49f8-489b-ad1f-76176f64bb27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/LinkedListSolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ArraySolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArraySolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LinkedListSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinkedListSolution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,28 +37,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ArraySolution.executor": "Run",
-    "Application.Kamacoder44.executor": "Run",
-    "Application.LinkedListSolution.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.MyLinkedList.executor": "Debug",
-    "Application.Solution704.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/xuahe/Documents/github/leetcode/src/Main.java",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ArraySolution.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Kamacoder44.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LinkedListSolution.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MyLinkedList.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.Solution704.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/xuahe/Documents/github/leetcode/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="main.java" />
@@ -108,7 +107,8 @@
       <workItem from="1747239753980" duration="18000" />
       <workItem from="1747239782924" duration="24432000" />
       <workItem from="1747364229785" duration="6179000" />
-      <workItem from="1747371071590" duration="8601000" />
+      <workItem from="1747371071590" duration="11040000" />
+      <workItem from="1747699302654" duration="7673000" />
     </task>
     <servers />
   </component>

@@ -184,6 +184,8 @@ public class LinkedListSolution {
     }
 
     // 206 - 迭代
+    // 时间复杂度 O(n)
+    // 空间复杂度 O(1)
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
         ListNode current = head;
@@ -198,7 +200,8 @@ public class LinkedListSolution {
     }
 
     // 206 - 递归
-
+    // 时间复杂度 O(n)
+    // 空间复杂度 O(n)
     public ListNode reverseList(ListNode head) {
 
 
